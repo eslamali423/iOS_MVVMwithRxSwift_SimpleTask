@@ -32,5 +32,14 @@ class UserViewModel {
     }
     
     
+    func deleteUser(index : Int) {
+        guard var users = try?  users.value() else {
+            return
+        }
+        users.remove(at: index)
+        self.users.on(.next(users))
+    }
+    
+    
     
 }

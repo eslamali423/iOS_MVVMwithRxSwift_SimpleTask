@@ -38,6 +38,12 @@ class ViewController: UIViewController {
         tableView.rx.itemSelected.subscribe(onNext: { indexPath in
             print(indexPath.row)
         }).disposed(by: bag)
+      
+        tableView.rx.itemDeleted.subscribe(onNext: { [weak self] indexPath in
+            guard let self = self else {return}
+            self.viewModel.deleteUser(index: indexPath.row)
+        })
+        
         
         
     }
