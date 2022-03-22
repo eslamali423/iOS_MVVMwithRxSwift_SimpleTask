@@ -35,7 +35,7 @@ class ViewController: UIViewController {
             
         }.disposed(by: bag)
         tableView.rx.setDelegate(self).disposed(by: bag)
-      // add user
+      // Edit user
         tableView.rx.itemSelected.subscribe(onNext: { indexPath in
             print(indexPath.row)
             let alert = UIAlertController(title: "Note", message: "Edit Note", preferredStyle: .alert)
@@ -63,8 +63,8 @@ class ViewController: UIViewController {
 
 
     @IBAction func didTapAddButton(_ sender: Any) {
-        
-        
+        let user =  User(id: 123, userId: 123, title: "New User", body: "newUserBody")
+        self.viewModel.addUser(user: user)
     }
 }
 

@@ -38,6 +38,9 @@ class UserViewModel {
         users.insert(user, at: 0)
         self.users.on(.next(users))
     }
+    
+    
+    
     func editUser (title : String , index : Int){
         
         guard var users = try?  users.value() else {return}
