@@ -35,10 +35,23 @@ class ViewController: UIViewController {
             
         }.disposed(by: bag)
         tableView.rx.setDelegate(self).disposed(by: bag)
+      // add user
         tableView.rx.itemSelected.subscribe(onNext: { indexPath in
             print(indexPath.row)
+            let alert = UIAlertController(title: "Note", message: "Edit Note", preferredStyle: .alert)
+            alert.addTextField { textField in
+                
+            }
+            
+            alert.addAction(UIAlertAction(title: "Edit", style: .default, handler: { (action) in
+                let textField = alert.textFields![0] as UITextField
+                self.viewModel.editUser (title : textField.text ?? "" , index : indexPath.row) 
+                
+            }))
+            
+            
         }).disposed(by: bag)
-      
+     // delete user
         tableView.rx.itemDeleted.subscribe(onNext: { [weak self] indexPath in
             guard let self = self else {return}
             self.viewModel.deleteUser(index: indexPath.row)
@@ -49,6 +62,10 @@ class ViewController: UIViewController {
     }
 
 
+    @IBAction func didTapAddButton(_ sender: Any) {
+        
+        
+    }
 }
 
 extension ViewController : UITableViewDelegate, UITableViewDataSource {
